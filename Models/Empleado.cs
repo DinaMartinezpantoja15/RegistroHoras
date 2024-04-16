@@ -10,7 +10,7 @@ namespace RegisroIngresos.Models
         public string? Numero_documento { get; set; }
         public int? Cargo { get; set; }
         public int? Area { get; set; }
-        public int? Registro { get; set; }
+        public string? Contraseña { get; set; }
 
 
     }

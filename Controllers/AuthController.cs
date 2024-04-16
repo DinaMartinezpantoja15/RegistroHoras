@@ -4,22 +4,52 @@ using Microsoft.AspNetCore.Mvc;
 using RegisroIngresos.Models;
 using RegisroIngresos.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
+using RegistroHoras.Models;
 
 namespace RegisroIngresos.Controllers
 {
-    public class AuthController : Controller{
-        public readonly BaseContext _context;
-        public AuthController(BaseContext context)
+   public class AuthController : Controller
+{
+    private readonly BaseContext _context;
+
+    public AuthController(BaseContext context)
+    {
+        _context = context;
+    }
+
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginModel model)
+    {
+        // Aquí deberías llamar a un método que maneje la autenticación, por ejemplo:
+        if (AuthenticateUser(model.Username, model.Password))
         {
-            _context = context;
+            return RedirectToAction("Index", "Empleados"); // Redirecciona a la página principal después del inicio de sesión exitoso
         }
-        public async Task<IActionResult>Login(){
-            return View();
-
+        else
+        {
+            ModelState.AddModelError("", "Nombre de usuario o contraseña incorrectos");
+            return View(model);
+        }
     }
-    public async Task<IActionResult>Register(){
-            return View();
 
+    private bool AuthenticateUser(string username, string password)
+    {
+
+    var user = _context.Empleados.SingleOrDefault(u => u.Numero_documento == username && u.Contraseña == password);
+
+
+    return user != null; // Retorna true si las credenciales son válidas, de lo contrario, retorna false
     }
 }
-}
+
+    }
+

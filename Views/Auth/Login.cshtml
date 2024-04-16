@@ -1,6 +1,13 @@
+@using RegistroHoras.Models;
+@model LoginModel;
+@{
+    ViewData["Title"] = "Edit";
+}
 @{
     Layout=null;
 }
+
+
 <head>
      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
      <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -24,22 +31,22 @@
                 </div>
 
                 <div class="login__forms">
-                    <form action="" class="login__registre" id="login-in">
+                    <form asp-controller="Auth"  asp-action="Login" class="login__registre" id="login-in">
                         <h1 class="login__title">Sign In</h1>
     
                         <div class="login__box">
                             <i class='bx bx-user login__icon'></i>
-                            <input type="text" placeholder="Username" class="login__input">
+                            <input type="text" asp-for="Username" placeholder="Username" class="login__input">
                         </div>
     
                         <div class="login__box">
                             <i class='bx bx-lock-alt login__icon'></i>
-                            <input type="password" placeholder="Password" class="login__input">
+                            <input type="password" asp-for="Password" placeholder="Password" class="login__input">
                         </div>
 
                         <a href="#" class="login__forgot">Forgot password?</a>
 
-                        <a href="#" class="login__button">Sign In</a>
+                        <button class="login__button" type="submit">Sign In</button>
 
                         <div>
                             <span class="login__account">Don't have an Account ?</span>
