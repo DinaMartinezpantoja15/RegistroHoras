@@ -9,5 +9,6 @@ namespace RegisroIngresos.Data{
 
         }
         public DbSet<Empleado> Empleados { get; set; }
+        public DbSet<Tipo_documento> Tipo_documento { get; set; }
     }
 }

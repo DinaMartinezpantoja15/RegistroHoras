@@ -16,6 +16,7 @@ namespace RegisroIngresos.Controllers
 {
     private readonly BaseContext _context;
 
+<<<<<<< HEAD
     public AuthController(BaseContext context)
     {
         _context = context;
@@ -53,3 +54,15 @@ namespace RegisroIngresos.Controllers
 
     }
 
+=======
+    } }}
+
+/*     [HttpPost]
+    public async Task<IActionResult>Register(){
+            var  Tipo_documento = await _context.Tipo_documento.ToListAsync();
+            ViewBag.Tipo_documento=Tipo_documento;
+            return View();
+    }
+}
+} */
+>>>>>>> cc79d850d9ba3d3134187f8436ec123ae78f6307
