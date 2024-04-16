@@ -1,18 +1,57 @@
+@model Empleado
+
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <h1>
+                <div class="d-flex justify-content-center">
+                <h1 class="mt-5">
                     Registrar
                 </h1>
+                </div>
+                <div class="card  m-5">
+                        <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Ingresa tu nombre..." aria-label="Nombre">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Ingresa tu Apellido..." aria-label="Apellidos">
+                        </div>
+                        </div>
+                        <div class="row mt-2">
+                        <div class="col">
+                        <select class="form-select" aria-label="Default select example">
+                            <option  disabled  selected hidden>Tipo de documento</option>
+                            <option value="1">cedula de ciudadania</option>
+                            <option value="2">cedula de estranjeria</option>
+                            <option value="3">pasaporte</option>
+                            <option value="4">tarjeta de identidad</option>
+                        </select>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Ingresa numero de documento..." aria-label="Apellidos">
+                        </div>
+                        </div>
+                        <div class="row mt-2">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Ingresa Cargo..." aria-label="Nombre">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Ingresa Area..." aria-label="Apellidos">
+                        </div>
+                        </div>
+                        <div class="">
+                            <div class="d-flex justify-content-center mt-5"> <h4>Crea por favor tu Contraseña</h4></div>
 
-                <div class="row">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Ingresa tu nombre..." aria-label="Nombre">
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Ingresa tu Apellido..." aria-label="Apellidos">
-                </div>
+                              <div class=" justify-content-center mt-5">
+                                <label for="exampleInputPassword1" class="form-label">Ingresa una contraseña de minimo 8 caracteres</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1">
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-info mt-3">Guardar</button>
                 </div>
 
 
