@@ -9,7 +9,7 @@ namespace RegisroIngresos.Data{
         {
 
         }
-        public DbSet<Empleado> Empleado { get; set; }
+        public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Registro> Registro { get; set; }
     
 
