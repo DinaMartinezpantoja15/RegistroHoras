@@ -1,5 +1,31 @@
-<h1>Ingreso con exito</h1>
+@* @model IEnumerable<RegistroHoras.Models.Ingreso> *@
 
-<form asp-controller="Hora" asp-action="MarcarHora" method="post">
-    <button type="submit">Marcar Hora</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detalles de Ingreso</title>
+</head>
+<body>
+    <div>
+        <h4>Detalles de Ingreso</h4>
+        <hr />
+        <h1>Ingreso con exito</h1>
+
+        <form asp-controller="Horas" asp-action="MarcarHora" method="post">
+            <button type="submit">Marcar Hora</button>
+        </form>
+      @*   @foreach (var ingreso in Model)
+        {
+        <dl class="row">
+            <dt class="col-sm-2">
+                <p>Hora de ingreso: @ingreso.Hora_Ingreso</p>
+            </dt>
+            <dd class="col-sm-10">
+                <p>Fecha de ingreso: @ingreso.Fecha_Ingreso</p>
+            </dd>
+        </dl>
+        } *@
+    </div>
+</body>
+</html>
