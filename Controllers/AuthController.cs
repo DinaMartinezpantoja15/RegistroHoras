@@ -16,7 +16,7 @@ namespace RegisroIngresos.Controllers
 {
     private readonly BaseContext _context;
 
-<<<<<<< HEAD
+
     public AuthController(BaseContext context)
     {
         _context = context;
@@ -37,9 +37,9 @@ namespace RegisroIngresos.Controllers
         }
         else
         {
-            ModelState.AddModelError("", "Nombre de usuario o contraseña incorrectos");
-            return View(model);
-        }
+            ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
+            return View("Login",model);
+        }   
     }
 
     private bool AuthenticateUser(string username, string password)
@@ -54,8 +54,7 @@ namespace RegisroIngresos.Controllers
 
     }
 
-=======
-    } }}
+
 
 /*     [HttpPost]
     public async Task<IActionResult>Register(){
@@ -65,4 +64,4 @@ namespace RegisroIngresos.Controllers
     }
 }
 } */
->>>>>>> cc79d850d9ba3d3134187f8436ec123ae78f6307
+
