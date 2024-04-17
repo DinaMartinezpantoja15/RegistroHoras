@@ -1,9 +1,14 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using RegisroIngresos.Models;
 using RegisroIngresos.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
+using RegistroHoras.Models;
+
 
 namespace RegisroIngresos.Controllers
 {
@@ -40,7 +45,7 @@ namespace RegisroIngresos.Controllers
     private bool AuthenticateUser(string username, string password)
     {
 
-    var user = _context.Empleados.SingleOrDefault(u => u.Numero_documento == username && u.Contraseña == password);
+    var user = _context.Empleado.SingleOrDefault(u => u.Numero_documento == username && u.Contraseña == password);
 
 
     return user != null; // Retorna true si las credenciales son válidas, de lo contrario, retorna false
@@ -61,5 +66,6 @@ namespace RegisroIngresos.Controllers
 
     
 }
+
 
 
