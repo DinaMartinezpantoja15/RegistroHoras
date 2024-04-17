@@ -1,21 +1,30 @@
 @* @model IEnumerable<RegistroHoras.Models.Ingreso> *@
-
+@{
+    Layout = null;
+}
 <!DOCTYPE html>
 <html>
 <head>
+     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <meta name="viewport" content="width=device-width" />
     <title>Detalles de Ingreso</title>
 </head>
 <body>
-    <div>
-        <h4>Detalles de Ingreso</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-aling center">
+                <form id="formCerrarSesion" asp-controller="Auth" asp-action="Logout" method="post">
+                    <button type="submit" class="btn btn-primary mt-5">Cerrar Sesión</button>
+                </form>
+
+             <h4 class="mt-5">Detalles de Ingreso</h4>
         <hr />
         <h1>Ingreso con exito</h1>
 
         <form asp-controller="Horas" asp-action="MarcarHora" method="post">
             <button type="submit">Marcar Hora</button>
         </form>
-        <p>Prueba</p>
+        
       @*   @foreach (var ingreso in Model)
         {
         <dl class="row">
@@ -27,6 +36,10 @@
             </dd>
         </dl>
         } *@
+        </div>
+    </div>
+    <div>
+        
     </div>
 </body>
 </html>

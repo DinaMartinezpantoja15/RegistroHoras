@@ -35,21 +35,21 @@ namespace RegistroHoras.Controllers
         public async Task<IActionResult> MarcarIngreso()
         {
              // Obtener la hora y fecha actual
-    DateTime horaActual = DateTime.Now;
+        DateTime horaActual = DateTime.Now;
 
-    // Crear un nuevo registro en la base de datos
-    Ingreso ingreso = new Ingreso
-    {
-        Hora_Ingreso = horaActual.TimeOfDay,
-        Fecha_Ingreso = horaActual.Date
-    };
+        // Crear un nuevo registro en la base de datos
+        Ingreso ingreso = new Ingreso
+        {
+            Hora_Ingreso = horaActual.TimeOfDay,
+            Fecha_Ingreso = horaActual.Date
+        };
 
-    _context.Ingresos.Add(ingreso);
-    await _context.SaveChangesAsync();
+        _context.Ingresos.Add(ingreso);
+        await _context.SaveChangesAsync();
 
-    // Retornar la vista "Index" del controlador "Empleados" con el último ingreso registrado
-    var ultimoIngreso = await _context.Ingresos.OrderByDescending(i => i.Fecha_Ingreso).ThenByDescending(i => i.Hora_Ingreso).FirstOrDefaultAsync();
-    return RedirectToAction("Index", "Empleados", new { horaIngreso = ultimoIngreso });
+        // Retornar la vista "Index" del controlador "Empleados" con el último ingreso registrado
+        var ultimoIngreso = await _context.Ingresos.OrderByDescending(i => i.Fecha_Ingreso).ThenByDescending(i => i.Hora_Ingreso).FirstOrDefaultAsync();
+        return RedirectToAction("Index", "Empleados", new { horaIngreso = ultimoIngreso });
         }
 
     }
