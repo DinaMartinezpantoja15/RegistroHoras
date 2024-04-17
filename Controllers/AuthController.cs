@@ -50,9 +50,21 @@ namespace RegisroIngresos.Controllers
 
     return user != null; // Retorna true si las credenciales son válidas, de lo contrario, retorna false
     }
-}
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        // Aquí puedes realizar cualquier limpieza necesaria para cerrar la sesión del usuario.
+        // Por ejemplo, puedes eliminar cualquier cookie de autenticación o información de sesión.
+        // await HttpContext.SignOutAsync();
+        // Después de cerrar sesión, puedes redirigir al usuario a la página de inicio de sesión u otra página de tu elección.
+        return RedirectToAction("Login", "Auth");
+    }
+
 
     }
+
+}
 
 
 
