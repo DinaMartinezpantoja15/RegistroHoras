@@ -1,20 +1,34 @@
-CREATE TABLE Ingreso(
+
+CREATE TABLE Empleado(
     Id int  NOT NULL  PRIMARY KEY AUTO_INCREMENT,
-    Hora_Ingreso TIME NOT NULL,
-    Fecha_Ingreso DATE NOT NULL
+    Nombre VARCHAR(255),
+    Apellido VARCHAR(255),
+    Tipo_documento VARCHAR(255),
+    Numero_documento VARCHAR(255),
+    Area VARCHAR (255),
+    Cargo VARCHAR (255),
+    Contraseña VARCHAR (255),
+    Registro_id int 
 )
 
-CREATE TABLE Salida(
+CREATE TABLE Registro(
     Id int  NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Hora_Salida TIME NOT NULL,
-    Fecha_Salida DATE NOT NULL
+    Hora_Salida TIME,
+    Fecha_Salida DATE,
+    Hora_entrada TIME,
+    Fecha_entrada DATE
 )
 
-DROP TABLE Registro;
+
+
+
+
+DROP TABLE `Empleado`;
+
 
 DROP FOREIGN KEY Empleados_ibfk_9;
 
-ALTER TABLE `Empleados` ADD FOREIGN KEY (Ingreso) REFERENCES Ingreso(Id)
+ALTER TABLE `Empleado` ADD FOREIGN KEY (Registro_id) REFERENCES Registro(Id)
 
 ALTER TABLE `Empleados` ADD FOREIGN KEY (`Salida`) REFERENCES `Salida`(Id)
 

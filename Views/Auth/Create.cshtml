@@ -2,6 +2,8 @@
 
 
 
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -12,17 +14,18 @@
                 </h1>
                 </div>
                 <div class="card  m-5">
+                    <form asp-action="Create" method="post">
                         <div class="row">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Ingresa tu nombre..." aria-label="Nombre">
+                            <input type="text" class="form-control"  asp-for="Nombre" id="Nombre" placeholder="Ingresa tu nombre..." aria-label="Nombre">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Ingresa tu Apellido..." aria-label="Apellidos">
+                            <input type="text" class="form-control"  asp-for="Apellido" id="Apellido" placeholder="Ingresa tu Apellido..." aria-label="Apellidos">
                         </div>
                         </div>
                         <div class="row mt-2">
                         <div class="col">
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" asp-for="Tipo_documento">
                             <option  disabled  selected hidden>Tipo de documento</option>
                             <option value="1">cedula de ciudadania</option>
                             <option value="2">cedula de estranjeria</option>
@@ -31,15 +34,15 @@
                         </select>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Ingresa numero de documento..." aria-label="Apellidos">
+                            <input type="text" class="form-control" asp-for="Numero_documento" id="Numero_documento" placeholder="Ingresa numero de documento..." aria-label="Apellidos">
                         </div>
                         </div>
                         <div class="row mt-2">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Ingresa Cargo..." aria-label="Nombre">
+                            <input type="text" class="form-control"   asp-for="Cargo" id="Numero_documento"  placeholder="Ingresa Cargo..." aria-label="Nombre">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Ingresa Area..." aria-label="Apellidos">
+                            <input type="text"  class="form-control"   asp-for="Area" id="Area"   placeholder="Ingresa Area..." aria-label="Area">
                         </div>
                         </div>
                         <div class="">
@@ -47,11 +50,12 @@
 
                               <div class=" justify-content-center mt-5">
                                 <label for="exampleInputPassword1" class="form-label">Ingresa una contraseña de minimo 8 caracteres</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
+                                <input type="password" class="form-control"  class="form-control" asp-for="Contraseña" id="Contraseña">
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-info mt-3">Guardar</button>
+                        <button type="submit" class="btn btn-info mt-3">Guardar</button>
+                    </form>
                 </div>
 
 

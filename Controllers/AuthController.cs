@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using RegisroIngresos.Models;
 using RegisroIngresos.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,11 +9,12 @@ using System.Security.Cryptography;
 using System.Text;
 using RegistroHoras.Models;
 
+
 namespace RegisroIngresos.Controllers
 {
-   public class AuthController : Controller
-{
-    private readonly BaseContext _context;
+    public class AuthController : Controller
+    {
+         private readonly BaseContext _context;
 
 
     public AuthController(BaseContext context)
@@ -39,13 +39,13 @@ namespace RegisroIngresos.Controllers
         {
             ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
             return View("Login",model);
-        }   
+        }  
     }
 
     private bool AuthenticateUser(string username, string password)
     {
 
-    var user = _context.Empleados.SingleOrDefault(u => u.Numero_documento == username && u.Contraseña == password);
+    var user = _context.Empleado.SingleOrDefault(u => u.Numero_documento == username && u.Contraseña == password);
 
 
     return user != null; // Retorna true si las credenciales son válidas, de lo contrario, retorna false
@@ -64,16 +64,8 @@ namespace RegisroIngresos.Controllers
 
     }
 
+    
 }
 
 
-
-/*     [HttpPost]
-    public async Task<IActionResult>Register(){
-            var  Tipo_documento = await _context.Tipo_documento.ToListAsync();
-            ViewBag.Tipo_documento=Tipo_documento;
-            return View();
-    }
-}
-} */
 

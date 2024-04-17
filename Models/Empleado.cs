@@ -1,23 +1,21 @@
+using System.ComponentModel.DataAnnotations;
 using RegistroHoras.Models;
 
-namespace RegisroIngresos.Models
+namespace RegistroHoras.Models
 
 {
     public class Empleado
     {
-        public int? Id { get; set; }
-        public string? Nombre { get; set; }
-        public string? Apellido { get; set; }
-        public int? Tipo_documento  { get; set; }
-        public string? Numero_documento { get; set; }
-        public int? Cargo { get; set; }
-        public int? Area { get; set; }
-        public string? Contraseña { get; set; }
+      [Key]
+      public int? Id { get; set; }
+      public string? Nombre { get; set; }
+      public string? Apellido { get; set; }
+      public string? Tipo_documento { get; set; }
+      public string? Numero_documento { get; set; }
+      public string? Area { get; set; }
+      public string? Cargo { get; set; }
+      public string? Contraseña { get; set; }
 
-    public static implicit operator Empleado(Ingreso v)
-    {
-      throw new NotImplementedException();
-    }
   }
 
 }
