@@ -16,13 +16,19 @@ namespace RegisroIngresos.Controllers
         public async Task<IActionResult>Login(){
             return View();
 
-    } }}
+    } 
+    public async Task<IActionResult>register(){
+        return View();
+    }
+    
+    
+    }}
 
 /*     [HttpPost]
     public async Task<IActionResult>Register(){
             var  Tipo_documento = await _context.Tipo_documento.ToListAsync();
             ViewBag.Tipo_documento=Tipo_documento;
-            return View();
+        
     }
 }
 } */
