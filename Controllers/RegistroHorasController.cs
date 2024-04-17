@@ -40,7 +40,7 @@ namespace RegistroHoras.Controllers
            /*  _context.Empleados.Add(hora); */
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home"); // Redireccionar a la página principal después de marcar la hora
+            return RedirectToAction("Index", "Empleados"); // Redireccionar a la página principal después de marcar la hora
         }
     }
 }
