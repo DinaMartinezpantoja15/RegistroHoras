@@ -41,5 +41,7 @@ INSERT INTO `Cargo`(`Nombre`) VALUES ("Administrador")
 
 INSERT INTO `Cargo`(`Nombre`) VALUES ("Tecnico")
 
+INSERT INTO `Ingreso`(`Hora_Ingreso`,`Fecha_Ingreso`) VALUES ("10:00","2020-11-16")
+
 
 INSERT INTO `Empleados`(`Nombre`,`Apellido`,`Salida`,`Numero_documento`,`Contraseña`) VALUES('Pedro','Perez',1,'1234','123');
