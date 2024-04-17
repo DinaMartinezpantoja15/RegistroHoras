@@ -1,3 +1,5 @@
+using RegistroHoras.Models;
+
 namespace RegisroIngresos.Models
 
 {
@@ -12,7 +14,10 @@ namespace RegisroIngresos.Models
         public int? Area { get; set; }
         public string? Contraseña { get; set; }
 
-
+    public static implicit operator Empleado(Ingreso v)
+    {
+      throw new NotImplementedException();
     }
+  }
 
 }

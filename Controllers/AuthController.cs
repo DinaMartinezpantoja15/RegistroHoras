@@ -7,29 +7,59 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RegisroIngresos.Controllers
 {
-    public class AuthController : Controller{
-        public readonly BaseContext _context;
-        public AuthController(BaseContext context)
+    public class AuthController : Controller
+    {
+         private readonly BaseContext _context;
+
+
+    public AuthController(BaseContext context)
+    {
+        _context = context;
+    }
+
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginModel model)
+    {
+        // Aquí deberías llamar a un método que maneje la autenticación, por ejemplo:
+        if (AuthenticateUser(model.Username, model.Password))
         {
-            _context = context;
+            return RedirectToAction("Index", "Empleados"); // Redirecciona a la página principal después del inicio de sesión exitoso
         }
-        public async Task<IActionResult>Login(){
-            return View();
+        else
+        {
+            ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
+            return View("Login",model);
+        }  
+    }
 
-    } 
-        public IActionResult Create(){
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(Empleado e) {
-            _context.Empleados.Add(e);
-            //var pruebna =  new Tipo_documento(){Nombre = e.Tipo_documento.ToString()};
-           // _context.Tipo_documento.Add(pruebna);
-            _context.SaveChanges();
-            return RedirectToAction("Login");
+    private bool AuthenticateUser(string username, string password)
+    {
 
-        }
+    var user = _context.Empleados.SingleOrDefault(u => u.Numero_documento == username && u.Contraseña == password);
+
+
+    return user != null; // Retorna true si las credenciales son válidas, de lo contrario, retorna false
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        // Aquí puedes realizar cualquier limpieza necesaria para cerrar la sesión del usuario.
+        // Por ejemplo, puedes eliminar cualquier cookie de autenticación o información de sesión.
+        // await HttpContext.SignOutAsync();
+        // Después de cerrar sesión, puedes redirigir al usuario a la página de inicio de sesión u otra página de tu elección.
+        return RedirectToAction("Login", "Auth");
+    }
+
+
+    }
+
     
-    
-    }}
+}
+
 
