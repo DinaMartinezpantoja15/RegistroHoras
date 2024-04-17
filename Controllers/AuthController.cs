@@ -17,18 +17,19 @@ namespace RegisroIngresos.Controllers
             return View();
 
     } 
-    public async Task<IActionResult>register(){
-        return View();
-    }
+        public IActionResult Create(){
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Empleado e) {
+            _context.Empleados.Add(e);
+            //var pruebna =  new Tipo_documento(){Nombre = e.Tipo_documento.ToString()};
+           // _context.Tipo_documento.Add(pruebna);
+            _context.SaveChanges();
+            return RedirectToAction("Login");
+
+        }
     
     
     }}
 
-/*     [HttpPost]
-    public async Task<IActionResult>Register(){
-            var  Tipo_documento = await _context.Tipo_documento.ToListAsync();
-            ViewBag.Tipo_documento=Tipo_documento;
-        
-    }
-}
-} */
