@@ -21,21 +21,12 @@
         <hr />
         <h1>Ingreso con exito</h1>
 
-        <form asp-controller="Horas" asp-action="MarcarHora" method="post">
-            <button type="submit">Marcar Hora</button>
+        <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarHora" method="post">
+            <button type="submit" onclick="obtenerHoraFechaActual()">Marcar Hora</button>
+            <p id="horaFechaActual"></p>
         </form>
+
         
-      @*   @foreach (var ingreso in Model)
-        {
-        <dl class="row">
-            <dt class="col-sm-2">
-                <p>Hora de ingreso: @ingreso.Hora_Ingreso</p>
-            </dt>
-            <dd class="col-sm-10">
-                <p>Fecha de ingreso: @ingreso.Fecha_Ingreso</p>
-            </dd>
-        </dl>
-        } *@
         </div>
     </div>
     <div>
@@ -43,3 +34,22 @@
     </div>
 </body>
 </html>
+<script>
+    function obtenerHoraFechaActual() {
+        // Obtener la hora y fecha actual
+        var fechaHoraActual = new Date();
+        var hora = fechaHoraActual.getHours();
+        var minutos = fechaHoraActual.getMinutes();
+        var segundos = fechaHoraActual.getSeconds();
+        var dia = fechaHoraActual.getDate();
+        var mes = fechaHoraActual.getMonth() + 1; // Meses en JavaScript van de 0 a 11
+        var año = fechaHoraActual.getFullYear();
+
+        // Formatear la hora y fecha actual
+        var horaFechaFormateada = `${hora}:${minutos}:${segundos} - ${dia}/${mes}/${año}`;
+
+        // Mostrar la hora y fecha actual en el párrafo correspondiente
+        document.getElementById("horaFechaActual").innerHTML = horaFechaFormateada;
+    }
+</script>
+

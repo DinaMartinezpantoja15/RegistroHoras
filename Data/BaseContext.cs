@@ -10,8 +10,11 @@ namespace RegistroHoras.Data{
 
         }
         public DbSet<Empleado> Empleados { get; set; }
-        public DbSet<Registro> Registro { get; set; }
+        public DbSet<Registro> Registros { get; set; }
     
-
+          protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configuración de las entidades y relaciones...
+        }
         
 }}
