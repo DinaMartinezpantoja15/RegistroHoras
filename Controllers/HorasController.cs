@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using RegisroIngresos.Data;
-using RegisroIngresos.Models;
+using RegistroHoras.Data;
+using RegistroHoras.Models;
 using RegistroHoras.Models;
 using System;
 
