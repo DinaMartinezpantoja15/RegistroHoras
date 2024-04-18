@@ -8,29 +8,32 @@ using System.Threading.Tasks;
 
 namespace RegisroIngresos.Controllers
 {
-    public class EmpleadosController : Controller{
+    public class EmpleadosController : Controller
+    {
         public readonly BaseContext _context;
         public EmpleadosController(BaseContext context)
         {
             _context = context;
         }
-        public async Task<IActionResult>Index(){
+        public async Task<IActionResult> Index()
+        {
             return View(await _context.Empleados.ToListAsync());
         }
 
-         /*   public async Task<IActionResult> Index()
+        /*   public async Task<IActionResult> Index()
+       {
+           // Obtener la lista de registros desde la base de datos
+           var registros = await _context.Registros.ToListAsync();
+
+           // Pasar la lista de registros como modelo a la vista
+           return View(registros);
+       } */
+
+        public async Task<IActionResult> Historial()
         {
-            // Obtener la lista de registros desde la base de datos
-            var registros = await _context.Registros.ToListAsync();
-
-            // Pasar la lista de registros como modelo a la vista
-            return View(registros);
-        } */
-
-        public IActionResult Historial(){
-            return View();
+            return View(await _context.Registro.ToListAsync());
         }
-        
+
 
     }
 }

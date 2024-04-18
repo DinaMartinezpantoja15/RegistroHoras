@@ -1,7 +1,39 @@
+
+
+
 <div class="container">
 
 <h1>Historial</h1>
 
+   @*       @foreach (var regist in Model){
+        <tr>
+            <td>Hora Entrada @regist.Hora_Entrada</td>
+            <td>Fecha Entrada @regist.Fecha_Entrada</td>
+            <td>Hola Salida @regist.Hora_Salida</td>
+            <td>Fecha Salida @regist.Fecha_Salida</td>
+        </tr>
+        }
+ *@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Hora Entrada</th>
+      <th scope="col">Fecha Entrada</th>
+      <th scope="col">Hora Salida</th>
+      <th scope="col">Fecha Salida</th>
+    </tr>
+  </thead>
+   @foreach (var regist in Model){
+         <tbody>
+        <tr>
+          <th scope="row">@regist.Hora_Entrada</th>
+          <td>@regist.Fecha_Entrada</td>
+          <td>@regist.Hora_Salida</td>
+          <td>@regist.Fecha_Salida</td>
+        </tr>
+      </tbody>
+        }
+</table>
 
 
 </div>
