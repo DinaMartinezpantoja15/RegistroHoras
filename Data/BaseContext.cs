@@ -10,7 +10,7 @@ namespace RegisroIngresos.Data{
 
         }
         public DbSet<Empleado> Empleados { get; set; }
-        public DbSet<Registro> Registros { get; set; }
+        public DbSet<Registro> Registro { get; set; }
     
           protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
