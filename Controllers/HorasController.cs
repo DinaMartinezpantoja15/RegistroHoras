@@ -36,7 +36,7 @@ namespace HorasController.Controllers
       _context.SaveChanges();
 
       // Redirigir a la misma página o a donde prefieras
-      return RedirectToAction("Index", "Empleados");
+      return RedirectToAction("Historial", "Empleados");
     }
   }
 }
