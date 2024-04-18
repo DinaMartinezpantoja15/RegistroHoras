@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RegistroHoras.Models;
 using RegistroHoras.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace RegisroIngresos.Controllers
 {
@@ -16,6 +17,15 @@ namespace RegisroIngresos.Controllers
         public async Task<IActionResult>Index(){
             return View(await _context.Empleados.ToListAsync());
         }
+
+         /*   public async Task<IActionResult> Index()
+        {
+            // Obtener la lista de registros desde la base de datos
+            var registros = await _context.Registros.ToListAsync();
+
+            // Pasar la lista de registros como modelo a la vista
+            return View(registros);
+        } */
 
         public IActionResult Historial(){
             return View();

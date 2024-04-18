@@ -1,4 +1,5 @@
-@* @model IEnumerable<RegistroHoras.Models.Ingreso> *@
+@* @model IEnumerable<RegistroHoras.Models.Registro> *@
+
 @{
     Layout = null;
 }
@@ -18,20 +19,28 @@
                 </form>
 
              <h4 class="mt-5">Detalles de Ingreso</h4>
-        <hr />
-        <h1>Ingreso con exito</h1>
+                <hr />
+                <h1>Ingreso con exito</h1>
 
-        <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarHora" method="post">
-            <button type="submit" onclick="obtenerHoraFechaActual()">Marcar Hora</button>
-            <p id="horaFechaActual"></p>
-        </form>
-
-        
+                <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarHora" method="post">
+                    <button type="submit" onclick="obtenerHoraFechaActual()">Marcar Hora</button>
+                    <p id="horaFechaActual"></p>
+                </form>
+            </div>
         </div>
-    </div>
     <div>
-        
-    </div>
+    <div>
+@*          @foreach (var regist in Model){
+        <tr>
+            <td>Hora Entrada @regist.Hora_Entrada</td>
+            <td>Fecha Entradad @regist.Fecha_Entrada</td>
+            <td>Hola Salida @regist.Hora_Salida</td>
+            <td>Fecha Salida @regist.Fecha_Salida</td>
+        </tr> *@
+        }
+    </div>    
+    
+   
 </body>
 </html>
 <script>
