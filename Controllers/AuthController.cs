@@ -16,97 +16,121 @@ namespace RegistroHoras.Controllers
 {
     public class AuthController : Controller
     {
-         private readonly BaseContext _context;
+        private readonly BaseContext _context;
 
 
-    public AuthController(BaseContext context)
-    {
-        _context = context;
-    }
-
-    public IActionResult Login()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Login(LoginModel model)
-    {
-        // Aquí deberías llamar a un método que maneje la autenticación, por ejemplo:
-        if (AuthenticateUser(model.Username, model.Password))
+        public AuthController(BaseContext context)
         {
-            return RedirectToAction("Index", "Empleados"); // Redirecciona a la página principal después del inicio de sesión exitoso
+            _context = context;
         }
-        else
-        {
-            ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
-            return View("Login",model);
-        }  
-    }
-
-    private bool AuthenticateUser(string username, string password)
-    {
-
-    var user = _context.Empleados.SingleOrDefault(u => u.Numero_documento == username && u.Contraseña == password);
-
-
-    return user != null; // Retorna true si las credenciales son válidas, de lo contrario, retorna false
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Logout()
-    {
-        // Aquí puedes realizar cualquier limpieza necesaria para cerrar la sesión del usuario.
-        // Por ejemplo, puedes eliminar cualquier cookie de autenticación o información de sesión.
-        // await HttpContext.SignOutAsync();
-        // Después de cerrar sesión, puedes redirigir al usuario a la página de inicio de sesión u otra página de tu elección.
-        return RedirectToAction("Login", "Auth");
-    }
-
 
 
         // se inicia formulario de crear un nuevo empleado
 
 
-     public IActionResult Create(){
+        public IActionResult Create()
+        {
             return View();
         }
 
-    [HttpPost]
-    public ActionResult Create(Empleado empleado)
-    {
-        if (!string.IsNullOrEmpty(empleado.Contraseña))
+        [HttpPost]
+        public ActionResult Create(Empleado empleado)
         {
-            empleado.Contraseña = CifrarContraseña(empleado.Contraseña);
+            if (!string.IsNullOrEmpty(empleado.Contraseña))
+            {
+                empleado.Contraseña = CifrarContraseña(empleado.Contraseña);
+            }
+
+            _context.Empleados.Add(empleado);
+            _context.SaveChanges();
+
+            return RedirectToAction("Login");
         }
 
-        _context.Empleados.Add(empleado);
-        _context.SaveChanges();
+        private string CifrarContraseña(string contraseña)
+        {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
 
-        return RedirectToAction("Login");
+            var pbkdf2 = new Rfc2898DeriveBytes(contraseña, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            string contraseñaCifrada = Convert.ToBase64String(hashBytes);
+            return contraseñaCifrada;
+        }
+
+
+        // se inicia el login con la autenticacion
+
+        public async Task<IActionResult> Login(Empleado model)
+        {
+            var empleado = await _context.Empleados.FirstOrDefaultAsync(e => e.Numero_documento == model.Numero_documento);
+
+
+            // Verificar si se encontró un empleado con el nombre de usuario proporcionado
+            if (empleado == null)
+            {
+                ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
+                return View("Login", model);
+            }
+
+            // Verificar si la contraseña proporcionada es correcta
+            if (VerificarContraseña(model.Contraseña, empleado.Contraseña))
+            {
+                // Inicio de sesión exitoso, redireccionar a la página principal o a donde sea necesario
+                return RedirectToAction("Index", "Empleados");
+            }
+            else
+            {
+                // Contraseña incorrecta
+                ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
+                return View("Login", model);
+            }
+        }
+
+        private bool VerificarContraseña(string contraseña, string contraseñaCifradaAlmacenada)
+        {
+            byte[] hashBytesAlmacenado = Convert.FromBase64String(contraseñaCifradaAlmacenada);
+
+            // Extraer la sal del hash almacenado
+            byte[] salt = new byte[16];
+            Array.Copy(hashBytesAlmacenado, 0, salt, 0, 16);
+
+            // Calcular el hash de la contraseña proporcionada utilizando la misma sal
+            var pbkdf2 = new Rfc2898DeriveBytes(contraseña, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            // Comparar los hashes
+            for (int i = 0; i < 20; i++)
+            {
+                if (hashBytesAlmacenado[i + 16] != hash[i])
+                {
+                    return false; // Las contraseñas no coinciden
+                }
+            }
+
+            return true; // Las contraseñas coinciden
+        }
+
+                [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            // Aquí puedes realizar cualquier limpieza necesaria para cerrar la sesión del usuario.
+            // Por ejemplo, puedes eliminar cualquier cookie de autenticación o información de sesión.
+            // await HttpContext.SignOutAsync();
+            // Después de cerrar sesión, puedes redirigir al usuario a la página de inicio de sesión u otra página de tu elección.
+            return RedirectToAction("Login", "Auth");
+        }
+
+
+
+
     }
-
-    private string CifrarContraseña(string contraseña)
-    {
-        byte[] salt;
-        new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-
-        var pbkdf2 = new Rfc2898DeriveBytes(contraseña, salt, 10000);
-        byte[] hash = pbkdf2.GetBytes(20);
-
-        byte[] hashBytes = new byte[36];
-        Array.Copy(salt, 0, hashBytes, 0, 16);
-        Array.Copy(hash, 0, hashBytes, 16, 20);
-
-        string contraseñaCifrada = Convert.ToBase64String(hashBytes);
-        return contraseñaCifrada;
-    }
-
-
-    
-
-    
-}}
+}
 
 
 

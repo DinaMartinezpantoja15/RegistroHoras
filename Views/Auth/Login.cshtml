@@ -1,5 +1,5 @@
 @using RegistroHoras.Models;
-@model LoginModel;
+@model Empleado;  
 @{
     ViewData["Title"] = "Edit";
 }
@@ -36,12 +36,12 @@
     
                         <div class="login__box">
                             <i class='bx bx-user login__icon'></i>
-                            <input type="text" asp-for="Username" placeholder="Username" class="login__input">
+                            <input type="text" asp-for="Numero_documento" placeholder="Username" class="login__input">
                         </div>
     
                         <div class="login__box">
                             <i class='bx bx-lock-alt login__icon'></i>
-                            <input type="password" asp-for="Password" placeholder="Password" class="login__input">
+                            <input type="password" asp-for="Contraseña" placeholder="Password" class="login__input">
                         </div>
 
                         <a href="#" class="login__forgot">Forgot password?</a>
