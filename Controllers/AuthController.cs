@@ -126,7 +126,7 @@ namespace RegistroHoras.Controllers
             return RedirectToAction("Login", "Auth");
         }
 
-
+        
 
 
     }
