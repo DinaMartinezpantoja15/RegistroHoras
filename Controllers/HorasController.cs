@@ -30,7 +30,7 @@ namespace HorasController.Controllers
       };
 
       // Añadir el nuevo registro al contexto de la base de datos
-      /* _context.Registros.Add(Nombre); */
+      _context.Registro.Add(registro);
 
       // Guardar los cambios en la base de datos
       _context.SaveChanges();
