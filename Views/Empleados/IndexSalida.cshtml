@@ -7,7 +7,7 @@
 <head>
      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <meta name="viewport" content="width=device-width" />
-        <title>Detalles de Ingreso</title>
+
 </head>
 <body>
     <div class="container">
@@ -16,13 +16,9 @@
                 <form id="formCerrarSesion" asp-controller="Auth" asp-action="Logout" method="post">
                     <button type="submit" class="btn btn-primary mt-5">Cerrar Sesión</button>
                 </form>
-                   <h4 class="mt-5">Detalles de Ingreso</h4>
-                <hr />
-                <h1>Ingreso con exito</h1>
 
-
-                <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarHora" method="post">
-                    <button type="submit" onclick="obtenerHoraFechaActual()">Marcar Hora</button>
+                <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarSalida" method="post">
+                    <button type="submit" onclick="obtenerHoraFechaActual()">Marcar Salida</button>
                     <p id="horaFechaActual"></p>
                 </form>
             </div>
@@ -30,7 +26,11 @@
     <div>
     <div>
 
-    </div>    
+    </div>
+                <form asp-controller="Empleados" asp-action="Historial" method="post">
+                    <button type="submit" >Historial</button>
+                    
+                </form>
     
    
 </body>
