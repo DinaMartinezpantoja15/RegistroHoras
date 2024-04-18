@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using RegisroIngresos.Models;
 using RegistroHoras.Models;
 
-namespace RegisroIngresos.Data{
+
+namespace RegistroHoras.Data{
     public class BaseContext: DbContext
     {
         public BaseContext(DbContextOptions<BaseContext> options) : base(options)

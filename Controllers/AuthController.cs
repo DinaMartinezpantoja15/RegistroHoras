@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using RegisroIngresos.Data;
+using RegistroHoras.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data.SqlClient;
@@ -9,8 +9,10 @@ using System.Security.Cryptography;
 using System.Text;
 using RegistroHoras.Models;
 
+using System;
 
-namespace RegisroIngresos.Controllers
+
+namespace RegistroHoras.Controllers
 {
     public class AuthController : Controller
     {
@@ -62,10 +64,49 @@ namespace RegisroIngresos.Controllers
     }
 
 
+
+        // se inicia formulario de crear un nuevo empleado
+
+
+     public IActionResult Create(){
+            return View();
+        }
+
+    [HttpPost]
+    public ActionResult Create(Empleado empleado)
+    {
+        if (!string.IsNullOrEmpty(empleado.Contraseña))
+        {
+            empleado.Contraseña = CifrarContraseña(empleado.Contraseña);
+        }
+
+        _context.Empleados.Add(empleado);
+        _context.SaveChanges();
+
+        return RedirectToAction("Login");
     }
 
+    private string CifrarContraseña(string contraseña)
+    {
+        byte[] salt;
+        new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+
+        var pbkdf2 = new Rfc2898DeriveBytes(contraseña, salt, 10000);
+        byte[] hash = pbkdf2.GetBytes(20);
+
+        byte[] hashBytes = new byte[36];
+        Array.Copy(salt, 0, hashBytes, 0, 16);
+        Array.Copy(hash, 0, hashBytes, 16, 20);
+
+        string contraseñaCifrada = Convert.ToBase64String(hashBytes);
+        return contraseñaCifrada;
+    }
+
+
     
-}
+
+    
+}}
 
 
 

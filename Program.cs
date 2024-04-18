@@ -1,4 +1,4 @@
-using RegisroIngresos.Data;
+using RegistroHoras.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

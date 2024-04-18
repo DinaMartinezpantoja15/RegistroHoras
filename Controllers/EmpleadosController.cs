@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using RegisroIngresos.Models;
-using RegisroIngresos.Data;
+using RegistroHoras.Models;
+using RegistroHoras.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace RegisroIngresos.Controllers
@@ -15,6 +15,10 @@ namespace RegisroIngresos.Controllers
         }
         public async Task<IActionResult>Index(){
             return View(await _context.Empleados.ToListAsync());
+        }
+
+        public IActionResult Historial(){
+            return View();
         }
         
 

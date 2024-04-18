@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using RegistroHoras.Models;
 
-namespace RegisroIngresos.Models{
+
+namespace RegistroHoras.Models{
 
     public class Registro{
         [Key]
@@ -11,6 +11,7 @@ namespace RegisroIngresos.Models{
         public TimeSpan? Hora_Entrada { get; set; }
         public DateOnly? Fecha_Salida { get; set; }
         public DateOnly? Fecha_Entrada { get; set; }
+        
 
     }
 }

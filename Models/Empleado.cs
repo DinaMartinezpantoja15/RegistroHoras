@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using RegistroHoras.Models;
+
 
 namespace RegistroHoras.Models
 
