@@ -46,6 +46,11 @@ namespace RegisroIngresos.Controllers
             return View(await _context.Registro.ToListAsync());
         }
 
+        public async Task<IActionResult> IndexSalida()
+        {
+            return View();
+        }
+
 
     }
 }

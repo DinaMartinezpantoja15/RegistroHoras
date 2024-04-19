@@ -20,9 +20,10 @@ namespace RegistroHoras.Controllers
 {
     public class AuthController : Controller
     {
-         private readonly BaseContext _context;
+        private readonly BaseContext _context;
 
 
+<<<<<<< HEAD
     public AuthController(BaseContext context)
     {
         _context = context;
@@ -30,6 +31,12 @@ namespace RegistroHoras.Controllers
         // se inicia el guardian//
 
 
+=======
+        public AuthController(BaseContext context)
+        {
+            _context = context;
+        }
+>>>>>>> 6ec8a215ec05a45107cf6230d03efb78dfb651ba
 
 
 
@@ -43,39 +50,40 @@ namespace RegistroHoras.Controllers
     // se inicia formulario de crear un nuevo empleado
 
 
-    public IActionResult Create(){
+        public IActionResult Create()
+        {
             return View();
         }
 
-    [HttpPost]
-    public ActionResult Create(Empleado empleado)
-    {
-        if (!string.IsNullOrEmpty(empleado.Contraseña))
+        [HttpPost]
+        public ActionResult Create(Empleado empleado)
         {
-            empleado.Contraseña = CifrarContraseña(empleado.Contraseña);
+            if (!string.IsNullOrEmpty(empleado.Contraseña))
+            {
+                empleado.Contraseña = CifrarContraseña(empleado.Contraseña);
+            }
+
+            _context.Empleados.Add(empleado);
+            _context.SaveChanges();
+
+            return RedirectToAction("Login");
         }
 
-        _context.Empleados.Add(empleado);
-        _context.SaveChanges();
+        private string CifrarContraseña(string contraseña)
+        {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
 
-        return RedirectToAction("Login");
-    }
+            var pbkdf2 = new Rfc2898DeriveBytes(contraseña, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
 
-    private string CifrarContraseña(string contraseña)
-    {
-        byte[] salt;
-        new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
 
-        var pbkdf2 = new Rfc2898DeriveBytes(contraseña, salt, 10000);
-        byte[] hash = pbkdf2.GetBytes(20);
-
-        byte[] hashBytes = new byte[36];
-        Array.Copy(salt, 0, hashBytes, 0, 16);
-        Array.Copy(hash, 0, hashBytes, 16, 20);
-
-        string contraseñaCifrada = Convert.ToBase64String(hashBytes);
-        return contraseñaCifrada;
-    }
+            string contraseñaCifrada = Convert.ToBase64String(hashBytes);
+            return contraseñaCifrada;
+        }
 
 
 
