@@ -1,8 +1,13 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RegistroHoras.Data;
 using RegistroHoras.Models;
-using RegistroHoras.Models;
 using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+
 
 
 namespace HorasController.Controllers
@@ -17,50 +22,91 @@ namespace HorasController.Controllers
     }
 
     [HttpPost]
-    public IActionResult MarcarHora()
+    public async Task<IActionResult> MarcarHora()
     {
-      // Obtener la hora y fecha actual del servidor
-      var horaFechaActual = DateTime.Now;
-
-      // Aquí puedes guardar la hora y fecha actual en tu base de datos, por ejemplo:
-      var registro = new Registro
+      try
       {
-        Hora_Entrada = horaFechaActual.TimeOfDay, // Guardar solo la hora
-        Fecha_Entrada = new DateOnly(horaFechaActual.Year, horaFechaActual.Month, horaFechaActual.Day) // Convertir DateTime a DateOnly // Guardar solo la fecha
-      };
+        // Obtener la hora y fecha actual del servidor
+        var horaFechaActual = DateTime.Now;
 
-      // Añadir el nuevo registro al contexto de la base de datos
-      _context.Registro.Add(registro);
+        // Obtener el ID del empleado almacenado en la sesión
+        var empleadoId = HttpContext.Session.GetInt32("Id");
 
-      // Guardar los cambios en la base de datos
-      _context.SaveChanges();
 
-      // Redirigir a la misma página o a donde prefieras
+        var registro = new Registro
+        {
+          Hora_Entrada = horaFechaActual.TimeOfDay,
+          Fecha_Entrada = new DateOnly(horaFechaActual.Year, horaFechaActual.Month, horaFechaActual.Day),
+          EmpleadoId = empleadoId.Value
+        };
+
+        // Añadir el nuevo registro al contexto de la base de datos
+        _context.Registro.Add(registro);
+        await _context.SaveChangesAsync();
+
+        TempData["MessageSuccess"] = "Se ha registrado tu entrada correctamente";
+        /* }
+        }
+       else
+       {
+         // No se encontró un ID de empleado válido en la sesión, mostrar un mensaje de error o redirigir a alguna página de error
+         TempData["MessageError"] = "No se encontró un empleado válido en la sesión";
+       } */
+      }
+      catch (Exception ex)
+      {
+        // Manejar errores (puedes enviar un mensaje a Slack u otro sistema de notificación)
+        TempData["MessageError"] = "Ocurrió un error al procesar tu solicitud";
+        // Loguear el error para futura revisión
+        Console.WriteLine($"Error al marcar la hora de entrada: {ex.Message}");
+      }
+
       return RedirectToAction("IndexSalida", "Empleados");
     }
+
+
 
     [HttpPost]
-    public IActionResult MarcarSalida()
+    public async Task<IActionResult> MarcarSalida()
     {
-      // Obtener la hora y fecha actual del servidor
-      var horaFechaActual = DateTime.Now;
-
-      // Aquí puedes guardar la hora y fecha actual en tu base de datos, por ejemplo:
-      var registro = new Registro
+      try
       {
-        Hora_Salida = horaFechaActual.TimeOfDay, // Guardar solo la hora
-        Fecha_Salida = new DateOnly(horaFechaActual.Year, horaFechaActual.Month, horaFechaActual.Day) // Convertir DateTime a DateOnly // Guardar solo la fecha
-      };
+        // Obtener el registro correspondiente al empleado que está intentando hacer el checkout
+        var registro = await _context.Registro.FirstOrDefaultAsync(r => r.EmpleadoId == HttpContext.Session.GetInt32("Id") && r.Hora_Salida == null);
 
-      // Añadir el nuevo registro al contexto de la base de datos
-      _context.Registro.Add(registro);
+        // Verificar si se encontró un registro válido
+        if (registro != null)
+        {
+          // Obtener la hora y fecha actual del servidor
+          var horaFechaActual = DateTime.Now;
 
-      // Guardar los cambios en la base de datos
-      _context.SaveChanges();
+          // Actualizar la propiedad Hora_Salida con la hora actual
+          registro.Hora_Salida = horaFechaActual.TimeOfDay;
 
-      // Redirigir a la misma página o a donde prefieras
-      return RedirectToAction("IndexSalida", "Empleados");
+          // Actualizar la propiedad Fecha_Salida con la fecha actual
+          registro.Fecha_Salida = new DateOnly(horaFechaActual.Year, horaFechaActual.Month, horaFechaActual.Day);
+
+          // Guardar los cambios en la base de datos
+          await _context.SaveChangesAsync();
+
+          TempData["MessageSuccess"] = "Se ha registrado tu salida correctamente";
+        }
+        else
+        {
+          TempData["MessageError"] = "No se encontró un registro de entrada válido para tu usuario";
+        }
+      }
+      catch (System.Exception ex)
+      {
+        // Manejar errores (puedes enviar un mensaje a Slack u otro sistema de notificación)
+        TempData["MessageError"] = "Ocurrió un error al procesar tu solicitud";
+        // Loguear el error para futura revisión
+        Console.WriteLine($"Error al marcar la salida: {ex.Message}");
+      }
+
+      return RedirectToAction("Index", "Empleados");
     }
+
   }
 }
 

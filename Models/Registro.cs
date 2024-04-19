@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using RegistroHoras.Data;
 
 
 namespace RegistroHoras.Models{
@@ -11,7 +12,7 @@ namespace RegistroHoras.Models{
         public TimeSpan? Hora_Entrada { get; set; }
         public DateOnly Fecha_Salida { get; set; }
         public DateOnly Fecha_Entrada { get; set; }
-         public int? EmployeeId { get; set; } 
+        public int? EmpleadoId { get; set; } 
 
     }
 }

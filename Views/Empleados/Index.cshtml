@@ -25,6 +25,11 @@
                     <button type="submit" onclick="obtenerHoraFechaActual()">Marcar Hora</button>
                     <p id="horaFechaActual"></p>
                 </form>
+                     @if(TempData["MessageSuccess"] != null){
+                <div class="alert alert-success" role="alert">
+                    @TempData["MessageSuccess"]
+                </div>
+                } 
             </div>
         </div>
     <div>
