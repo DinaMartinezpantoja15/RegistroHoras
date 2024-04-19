@@ -23,28 +23,11 @@ namespace RegistroHoras.Controllers
         private readonly BaseContext _context;
 
 
-<<<<<<< HEAD
     public AuthController(BaseContext context)
     {
         _context = context;
     }
         // se inicia el guardian//
-
-
-=======
-        public AuthController(BaseContext context)
-        {
-            _context = context;
-        }
->>>>>>> 6ec8a215ec05a45107cf6230d03efb78dfb651ba
-
-
-
-
-
-
-
-
 
 
     // se inicia formulario de crear un nuevo empleado
