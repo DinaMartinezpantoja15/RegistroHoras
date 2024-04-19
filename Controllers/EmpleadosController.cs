@@ -15,10 +15,22 @@ namespace RegisroIngresos.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult>Index()
         {
-            return View(await _context.Empleados.ToListAsync());
-        }
+            ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+            if (ViewBag.Nombre==null){
+                return RedirectToAction("Login","Auth");
+            }
+            
+                
+                
+                return View(await _context.Empleados.ToListAsync());
+
+            }
+
+            
+            
 
         /*   public async Task<IActionResult> Index()
        {
