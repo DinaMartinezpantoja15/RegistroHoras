@@ -87,7 +87,6 @@ namespace HorasController.Controllers
           registro.Fecha_Salida = new DateOnly(horaFechaActual.Year, horaFechaActual.Month, horaFechaActual.Day);
 
           // Guardar los cambios en la base de datos
-          _context.Registro.Add(registro);
           await _context.SaveChangesAsync();
 
           TempData["MessageSuccess"] = "Se ha registrado tu salida correctamente";

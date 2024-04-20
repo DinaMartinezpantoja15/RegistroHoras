@@ -1,3 +1,4 @@
+@Model RegistroHoras.Models;
 
 @{
     Layout = null;
@@ -31,6 +32,10 @@
                 </div>
                 } 
             </div>
+             <form asp-controller="Empleados" asp-action="Historial" asp-route-id="@ViewBag.EmpleadoId" method="post">
+                    <button type="submit" >Historial</button>
+                    
+            </form>
         </div>
     <div>
     <div>

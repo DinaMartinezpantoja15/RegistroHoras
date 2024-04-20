@@ -52,5 +52,9 @@ namespace RegisroIngresos.Controllers
         }
 
 
+        /* public async Task<IActionResult> Historial(int id)
+        {
+            return View(await _context.Registro.FirstOrDefaultAsync(m=> m.Id == id));
+        } */
     }
 }
