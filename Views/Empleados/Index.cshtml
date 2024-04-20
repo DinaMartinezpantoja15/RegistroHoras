@@ -1,30 +1,29 @@
-
-@{
-    Layout = null;
-}
+@model RegistroHoras.Models.Empleado;
 <!DOCTYPE html>
 <html>
-<head>
-     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <meta name="viewport" content="width=device-width" />
-        <title>Detalles de Ingreso</title>
-</head>
+
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-aling center">
-                <form id="formCerrarSesion" asp-controller="Auth" asp-action="Logout" method="post">
-                    <button type="submit" class="btn btn-primary mt-5">Cerrar Sesión</button>
-                </form>
-                   <h4 class="mt-5">Detalles de Ingreso</h4>
-                <hr />
-                <h1>Ingreso con exito</h1>
+            <div class="d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+            <img src="https://i.pinimg.com/736x/8f/df/91/8fdf91c06e749bf964773838e3a8112f.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                    <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarHora" method="post">
+                    <button type="submit" class="btn btn-outline-success" onclick="obtenerHoraFechaActual()">Marcar ingreso</button>
 
-
-                <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarHora" method="post">
-                    <button type="submit" onclick="obtenerHoraFechaActual()">Marcar Hora</button>
                     <p id="horaFechaActual"></p>
                 </form>
+            </div>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-aling center">
+
+
+
+
             </div>
         </div>
     <div>
@@ -52,5 +51,8 @@
         // Mostrar la hora y fecha actual en el párrafo correspondiente
         document.getElementById("horaFechaActual").innerHTML = horaFechaFormateada;
     }
+
+
+    
 </script>
 

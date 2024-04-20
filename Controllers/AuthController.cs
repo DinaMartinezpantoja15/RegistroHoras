@@ -91,6 +91,7 @@ namespace RegistroHoras.Controllers
 
         // Inicio de sesión exitoso, redireccionar a la página principal o a donde sea necesario
         HttpContext.Session.SetString("Nombre", empleado.Nombre );
+        
         return RedirectToAction("Index", "Empleados");
 
     }
