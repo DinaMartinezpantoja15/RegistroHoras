@@ -1,6 +1,8 @@
 
 <div class="container">
-
+<form id="formCerrarSesion" asp-controller="Empleados" asp-action="Index">
+     <button type="submit" class="btn btn-primary mb-2">Volver</button>
+</form>
 <h1>Historial</h1>
 
    @*       @foreach (var regist in Model){
@@ -32,8 +34,8 @@
       </tbody>
         }
 </table>
-                <form id="formCerrarSesion" asp-controller="Auth" asp-action="Logout" method="post">
+              @*   <form id="formCerrarSesion" asp-controller="Auth" asp-action="Logout" method="post">
                     <button type="submit" class="btn btn-primary mt-5">Cerrar Sesión</button>
-                </form>
+                </form> *@
 
 </div>
