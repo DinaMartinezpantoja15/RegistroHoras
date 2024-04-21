@@ -27,10 +27,10 @@
     <div>
 
     </div>
-                <form asp-controller="Empleados" asp-action="Historial" method="post">
+            <form asp-controller="Empleados" asp-action="Historial" asp-route-id="@ViewBag.EmpleadoId" method="post">
                     <button type="submit" >Historial</button>
                     
-                </form>
+            </form>
     
    
 </body>
