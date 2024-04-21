@@ -1,7 +1,4 @@
 
-@{
-    Layout = null;
-}
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,27 +8,25 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-aling center">
-                <form id="formCerrarSesion" asp-controller="Auth" asp-action="Logout" method="post">
-                    <button type="submit" class="btn btn-primary mt-5">Cerrar Sesión</button>
-                </form>
-
-                <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarSalida" method="post">
-                    <button type="submit" onclick="obtenerHoraFechaActual()">Marcar Salida</button>
-                    <p id="horaFechaActual"></p>
-                </form>
-            </div>
-        </div>
-    <div>
-    <div>
-
-    </div>
-            <form asp-controller="Empleados" asp-action="Historial" asp-route-id="@ViewBag.EmpleadoId" method="post">
-                    <button type="submit" >Historial</button>
-                    
+    <div class="row justify-content-center"> <!-- Alinea el contenido al centro -->
+        <div class="col-md-12 text-center"> <!-- Centra el contenido horizontalmente -->
+            <!-- Botón para marcar salida -->
+            <form id="formMarcarHora" asp-controller="Horas" asp-action="MarcarSalida" method="post">
+                <button type="submit" class="btn btn-primary mt-5">Marcar Salida</button>
+                <p id="horaFechaActual"></p>
             </form>
-    
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3"> <!-- Añade espacio entre los botones y el botón Historial -->
+        <div class="col-md-12 text-center">
+            <!-- Botón para ver historial -->
+            <form asp-controller="Empleados" asp-action="Historial" asp-route-id="@ViewBag.EmpleadoId" method="post">
+                <button type="submit" class="btn btn-secondary">Historial</button>
+            </form>
+        </div>
+    </div>
+</div>
+
    
 </body>
 </html>

@@ -26,9 +26,10 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-aling center">
-
-
-
+               <form asp-controller="Empleados" asp-action="Historial" asp-route-id="@ViewBag.EmpleadoId" method="post">
+                    <button type="submit" >Historial</button>
+                    
+            </form>
 
             </div>
         </div>
