@@ -51,6 +51,11 @@ namespace RegisroIngresos.Controllers
             return View();
         }
 
+          public async Task<IActionResult> ListaEmpleados()
+        {
+            return View(await _context.Empleados.ToListAsync());
+        }
+
 
         /* public async Task<IActionResult> Historial(int id)
         {

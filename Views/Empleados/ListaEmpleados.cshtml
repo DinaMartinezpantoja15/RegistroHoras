@@ -1,0 +1,47 @@
+
+<div class="container">
+<form id="formCerrarSesion" asp-controller="Empleados" asp-action="Index">
+     <button type="submit" class="btn btn-primary mb-2">Volver</button>
+</form>
+<h1>Lista Empleados</h1>
+
+   @*       @foreach (var regist in Model){
+        <tr>
+            <td>Hora Entrada @regist.Hora_Entrada</td>
+            <td>Fecha Entrada @regist.Fecha_Entrada</td>
+            <td>Hola Salida @regist.Hora_Salida</td>
+            <td>Fecha Salida @regist.Fecha_Salida</td>
+        </tr>
+        }
+ *@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombres</th>
+      <th scope="col">Apellidos</th>
+      <th scope="col">Tipo Documento</th>
+      <th scope="col">Numero Documento</th>
+      <th scope="col">Area</th>
+      <th scope="col">Cargo</th>
+      <th scope="col">Contraseña</th>
+    </tr>
+  </thead>
+   @foreach (var empleado in Model){
+         <tbody>
+        <tr>
+          <th scope="row">@empleado.Nombre</th>
+          <td>@empleado.Apellido</td>
+          <td>@empleado.Tipo_documento</td>
+          <td>@empleado.Numero_documento</td>
+          <td>@empleado.Area</td>
+          <td>@empleado.Cargo</td>
+          <td>@empleado.Contraseña</td>
+        </tr>
+      </tbody>
+        }
+</table>
+              @*   <form id="formCerrarSesion" asp-controller="Auth" asp-action="Logout" method="post">
+                    <button type="submit" class="btn btn-primary mt-5">Cerrar Sesión</button>
+                </form> *@
+
+</div>
